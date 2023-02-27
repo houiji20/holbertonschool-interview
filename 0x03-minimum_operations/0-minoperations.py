@@ -1,38 +1,30 @@
 #!/usr/bin/python3
 """
-calculates the fewest number of operations needed to result
-in exactly n H characters in the file.
+In a text file, there is a single character H. Your text editor
+can execute only two operations in this file: Copy All and Paste.
+Given a number n, write a method that calculates the fewest number
+of operations needed to result in exactly n H characters in the file.
 """
 
 
+def countProcess(num):
+    """ Return list of process until n H """
+    con = 1
+    p_list = []
+    val = num
+    while val != 1:
+        con += 1
+        if val % con == 0:
+            while (val % con == 0 and val != 1):
+                val /= con
+                p_list.append(con)
+
+    return p_list
+
+
 def minOperations(n):
-    """
-    minOperations min operations
-    Args:
-        n :int
-    """
-    t = n
-    i2 = 0
-    i3 = 0
-    i5 = 0
-    i7 = 0
-    i11 = 0
-    if (n <= 0):
+    """ Return sum of process until n H """
+    if n < 2 or type(n) is not int:
         return 0
-    while (t % 2 == 0):
-        i2 += 1
-        t = t / 2
-    while (t % 3 == 0):
-        t = t / 3
-        i3 += 1
-    while (t % 5 == 0):
-        t = t/5
-        i5 += 1
-    while (t % 7 == 0):
-        t = t / 7
-        i7 += 1
-    while (t % 11 == 0):
-        t = t / 11
-        i11 += 1
-    m = i5 * 5 + i3 * 3 + i2 * 2 + i7 * 7 + i11 * 11
-    return m
+    values = countProcess(n)
+    return sum(values)
